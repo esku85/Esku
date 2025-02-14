@@ -31,7 +31,9 @@ jobs:
 
       - name: Configure Buildozer
         run: |
-          sed -i 's/# requirements = python3,kivy/requirements = python3,kivy/g' buildozer.spec
+          sed -i 's|# source.dir = .|source.dir = .|' buildozer.spec
+          sed -i 's|# version = 1.0|version = 1.0|' buildozer.spec
+          cat buildozer.spec
 
       - name: Build APK
         run: |
