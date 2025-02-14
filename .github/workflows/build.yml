@@ -29,10 +29,12 @@ jobs:
         run: |
           buildozer init
 
-      - name: Configure Buildozer
+      - name: Fix buildozer.spec
         run: |
           sed -i 's|# source.dir = .|source.dir = .|' buildozer.spec
           sed -i 's|# version = 1.0|version = 1.0|' buildozer.spec
+          if ! grep -q "source.dir =" buildozer.spec; then echo "source.dir = ." >> buildozer.spec; fi
+          if ! grep -q "version =" buildozer.spec; then echo "version = 1.0" >> buildozer.spec; fi
           cat buildozer.spec
 
       - name: Build APK
